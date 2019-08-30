@@ -90,8 +90,84 @@
     
     
     
+    <div class="container">
+        <div class="media-container-row">
+            <div class="container align-center" id="Modelo3d">
+                <script src="assets/three/three.min.js"></script>
+                <script src="assets/three/OBJLoader.js"></script>
+                <script src="assets/three/OrbitControls.js"></script>
+                <script>
+                    var scene, camera, renderer;
+                    var scene = new THREE.Scene();
+                    scene.background = new THREE.Color(0xE6FFFA);
+                    var camera = new THREE.PerspectiveCamera(75,window.innerWidth*0.6/window.innerHeight*0.6,1,5000);
+                    camera.position.z = 4;
+                    
+                    scene.add( camera );
+
+                    var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+                    scene.add( ambientLight );
+                    var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+                    camera.add( pointLight );
+
+                    
+                    var diente;
+                    var loader = new THREE.OBJLoader();
+
+                    loader.load("assets/modelos/pre-Molar.obj", 
+                    function(object){
+                        object.traverse( function ( child ) {
+                            if ( child instanceof THREE.Mesh ) {
+                                child.material = new THREE.MeshNormalMaterial();
+                            }
+                        });
+                        object.position.y = -0.75;
+                        scene.add(object);
+                    });
+                    
+
+
+                    var renderer = new THREE.WebGLRenderer();
+                    renderer.setSize(window.innerWidth*0.4,window.innerHeight*0.6);
+                    var padre = document.getElementById("Modelo3d");
+                    padre.appendChild(renderer.domElement);
+                    
+
+                    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+                    controls.EnableZoom2 = false;
+                    controls.update();
+                    
+                    
+                    var render = function(){
+                        renderer.render(scene,camera);
+                    }
+
+                    var animate = function() {
+                        camera.lookAt( scene.position );
+                        requestAnimationFrame(animate);
+                        controls.update();
+                        render();
+                    }
+                    animate();
+                </script>
+            </div>
+            <div class="media-content align-center">
+                <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Observa tu Dentograma en 3D</h2>
+                <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
+                    Podrás ver el estado de tus dientes a través de un modelo dental 3d
+                    con el que puedes interactuar, generado a partir de tus datos.</h3>
+            </div>
+        </div>   
+    </div>
+</section>
+
+<section class="countdown1 cid-rAyHAp7M3z mbr-parallax-background" id="countdown1-6">
+
+    <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(168, 168, 168);">
+    </div>
+    
     <div class="container ">
-        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Pronto estaremos con tigo ...</h2>
+        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Pronto estaremos contigo ...</h2>
         <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
             Recuerda seguirnos en nuestras redes sociales para mas informacion</h3>
         
@@ -118,6 +194,7 @@
   <script src="assets/parallax/jarallax.min.js"></script>
   <script src="assets/smoothscroll/smooth-scroll.js"></script>
   <script src="assets/theme/js/script.js"></script>
+  
   
   
 </body>
