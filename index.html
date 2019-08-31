@@ -22,7 +22,7 @@
 </head>
 <body>
     <!-- HEADER 
-    <?php include('header.html');?> -->
+    <?php include_once('header.html');?> -->
     <section class="menu cid-rAyFsCEsM1" once="menu" id="menu2-4">
         <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm" style="background-color: #F0FFFF; position: relative;">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                         <a class="nav-link link text-black display-4" href="./preguntasFrecuentes.html">Preguntas Frecuentes</a>
                     </li>
                     <div class="navbar-buttons mbr-section-btn">
-                        <a class="btn btn-sm btn-primary display-4" href="#" style="margin: 0;">
+                        <a class="btn btn-sm btn-primary display-4" href="./contacto.html" style="margin: 0;">
                             <span class="socicon socicon-mail mbr-iconfont mbr-iconfont-btn"></span>Contacto
                         </a>
                     </div>
@@ -176,14 +176,14 @@
             </div>
         </div>
     </section>
-    <!-- END FOOTER -->
-
     <style type="text/css">
         .white_font{
             color: white;
             text-align: left;
         }
     </style>
+    <!-- END FOOTER -->
+
 
     <script src="assets/three/three.min.js"></script>
     <script src="assets/three/OBJLoader.js"></script>
@@ -192,7 +192,7 @@
         var scene, camera, renderer;
         var scene = new THREE.Scene();
         scene.background = new THREE.Color(0xE6FFFA);
-        var camera = new THREE.PerspectiveCamera(75,window.innerWidth*0.6/window.innerHeight*0.6,1,5000);
+        var camera = new THREE.PerspectiveCamera(100,window.innerWidth*0.8/window.innerHeight*0.7,1,5000);
         camera.position.z = 4;
         
         scene.add( camera );

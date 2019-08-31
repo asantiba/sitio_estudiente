@@ -22,7 +22,7 @@
 </head>
 <body>
     <!-- HEADER 
-    <?php include('header.html');?> -->
+    <?php include_once('header.html');?> -->
     <section class="menu cid-rAyFsCEsM1" once="menu" id="menu2-4">
         <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm" style="background-color: #F0FFFF; position: relative;">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                         <a class="nav-link link text-black display-4" href="./preguntasFrecuentes.html">Preguntas Frecuentes</a>
                     </li>
                     <div class="navbar-buttons mbr-section-btn">
-                        <a class="btn btn-sm btn-primary display-4" href="./contacto.html" style="margin: 0;">
+                        <a class="btn btn-sm btn-primary display-4" href="#" style="margin: 0;">
                             <span class="socicon socicon-mail mbr-iconfont mbr-iconfont-btn"></span>Contacto
                         </a>
                     </div>
@@ -64,44 +64,52 @@
     </section>
     <!-- END HEADER -->
 
-    <section class="header7 mbr-parallax-background" id="header7-4">
-        <br>
-        <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(255, 255, 255);">
-        </div>
+    <!-- FORMULARIO -->
+    <section class="menu cid-rAyFsCEsM1" once="menu" id="contact">
         <div class="container">
+            <br>
             <div class="row">
-                <div class="col-md-4 align-center">
-                    <img src="assets/images/logo_pw.png" style="height: 200px;">
-                </div>
-                <div class="col-md-8 align-left" style="width: 150%">
-                    <h2 class="mbr-section-title pb-3 mbr-fonts-style display-6">Quienes somos</h2>
-                    <p class="mbr-fonts-style panel-text display-7">
-                        Somos Pyramid Works, pre-empresa enfocada al desarrollo de soluciones tecnológicas e innovadoras ante problemáticas que enfrenta nuestra sociedad. Pyramid Works está conformada por estudiantes de Ingeniería Civil Informática de la Universidad Técnico Federico Santa María, quienes demuestran sus habilidades y conocimientos con las tecnologías más competitivas del mercado en el desarrollo de software. <br>
-                        Actualmente nos encontramos desarrollando la aplicación EsTuDiente que busca mejorar la salud dental del país en colaboración con Facultades de Odontología, además de apoyar al progreso de estudiantes de odontología en su meta de ser profesionales. <br>
-                        Nuestra experiencia, responsabilidad y compromiso es avalada por cada trabajo que realizamos a base de esfuerzo y motivación.
-                    </p>
-                </div>
-                <div class="col-md-4"></div>
                 <div class="col-md-8 align-left">
-                    <h2 class="mbr-section-title pb-3 mbr-fonts-style display-6">Misión</h2>
-                    <p class="mbr-fonts-style panel-text display-7">
-                        Diseñar soluciones tecnológicas e innovadoras en función de las necesidades que poseen las personas, con la finalidad de generar una mejor calidad de vida y un aumento en el desarrollo de Chile. 
-                    </p>
+                    <h2 class="mbr-section-title pb-3 mbr-fonts-style display-6">Contáctanos</h2>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-8 align-left">
-                    <h2 class="mbr-section-title pb-3 mbr-fonts-style display-6">Visión</h2>
-                    <p class="mbr-fonts-style panel-text display-7">
-                        Crear software confiable, eficiente y útil que cumpla las espectativas de nuestros clientes, satisfacer las necesidades de nuestros usuarios y aplicar nuestro conocimiento  empleando las herramientas mas competitivas de la última década para el logro de nuestros objetivos.
-                    </p>
-                </div>
-
-                <div class="col-md-12">
-                    <h2 class="mbr-section-title pb-3 mbr-fonts-style display-6">Conócenos</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <input class="form-control" id="name" type="text" placeholder="Nombre" required autofocus>
+                                  <p class="help-block text-danger"></p>
+                                </div>
+                            <div class="form-group">
+                                <input class="form-control" id="email" type="email" placeholder="Correo" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="phone" type="tel" placeholder="Celular">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <textarea class="form-control" id="message" placeholder="Tu mensaje..." required></textarea>
+                                  <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Contactar</button>
+                          </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <br><br>
     </section>
+
 
     <!-- FOOTER -->
     <section style="background-color: #222; height: 300px">
@@ -146,15 +154,14 @@
     <script src="assets/popper/popper.min.js"></script>
     <script src="assets/tether/tether.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/smoothscroll/smooth-scroll.js"></script>
+    <script src="assets/countdown/jquery.countdown.min.js"></script>
     <script src="assets/dropdown/js/nav-dropdown.js"></script>
     <script src="assets/dropdown/js/navbar-dropdown.js"></script>
     <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
-    <script src="assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
-    <script src="assets/theme/js/script.js"></script>
     <script src="assets/parallax/jarallax.min.js"></script>
     <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  
-  
+    <script src="assets/theme/js/script.js"></script>
+    <!-- Envio de msj -->
+    <script src="assets/contacto/contact_me.js"></script>
 </body>
 </html>
