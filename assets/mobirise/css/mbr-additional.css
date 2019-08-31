@@ -1461,7 +1461,7 @@ body {
   display: flex;
   margin-left: 5rem;
   padding: 0;
-  transition: padding .2s;
+  transition: padding 15s;
   min-height: 3.8rem;
   -webkit-align-items: center;
   align-items: center;
@@ -1560,7 +1560,7 @@ body {
   font-size: 2.5rem !important;
 }
 .cid-rAyFsCEsM1 .navbar.navbar-short .navbar-logo a img {
-  height: 3rem !important;
+  height: 4rem !important;
 }
 .cid-rAyFsCEsM1 .navbar.navbar-short .navbar-brand {
   min-height: 3rem;
@@ -2063,7 +2063,7 @@ body {
   font-size: 2.5rem !important;
 }
 .cid-rAyFsCEsM1 .navbar.navbar-short .navbar-logo a img {
-  height: 3rem !important;
+  height: 4rem !important;
 }
 .cid-rAyFsCEsM1 .navbar.navbar-short .navbar-brand {
   min-height: 3rem;
