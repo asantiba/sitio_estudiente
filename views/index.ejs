@@ -1,0 +1,144 @@
+<%- include layouts/header.ejs %>
+
+	<!-- Esta es la vista principal donde se renderiza todo -->
+	<section class="header7 cid-rAyGXdc0MC" id="seccion1">
+
+        <!-- <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(35, 35, 35);">
+        </div> -->
+
+        <div class="container">
+            <div class="media-container-row">
+                <div class="media-content align-center">
+                    <div class="mbr-section-text mbr-white pb-3">
+                    	<h2 class="mbr-text mbr-fonts-style">Aplicación Móvil EsTuDiente</h2>
+                        <h3 class="mbr-text mbr-fonts-style display-5">
+                            Busca dar respuesta al problema de salud dental en Chile, presentando un catálogo de tratamientos dentales a bajo costo.
+                        </h3>
+                    </div>
+                    <div class="mbr-section-btn">
+                        <a class="btn btn-md btn-white-outline" href="#seccion2">Nuestra Aplicación</a>
+                        <a class="btn btn-md btn-white-outline" href="/nosotros">Nuestro Equipo</a>
+                    </div>
+                </div>
+
+                <!-- Video -->
+                <div class="mbr-figure" style="width: 100%; border-style: outset; padding: 0; border: 1px solid rgba(0, 0, 0, .3); border-width: 5px 5px 5px; border-radius: 1px; box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.3)">
+                    <iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/uicpJRYKQfM?rel=0&amp;amp;showinfo=0&amp;autoplay=0&amp;loop=0" frameborder="0" height="300" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE LA APLICACIÓN -->
+    <section class="cid-rAyHAp7M3z mbr-parallax-background" style="background-color: #eeeeee" id="seccion2">
+        <div class="container">
+            <div class="media-container-row">
+                <div class="media-content align-center">
+                    <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Bienvenido a EsTuDiente</h2>
+                    <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
+                        Aplicación intuitiva que busca presentar un catálogo de tratamientos dentales a bajo costo, impartidos por estudiantes de odontología supervisados por doctores expertos, con la finalidad de ayudar tanto a pacientes como a estudiantes.</h3>
+                </div>
+                <div class="media-content align-center">
+                    <img src="assets/images/inicio.png" style="width: 80%">
+                </div>
+            </div>   
+        </div>
+    </section>
+
+    <!-- MODELO 3D -->
+    <section class="countdown1 cid-rAyHAp7M3z" id="seccion3">
+        <div class="container">
+            <div class="media-container-row">
+                <div class="container align-center" id="Modelo3d" style="max-width: 100%; padding: 0">
+                    <!-- Modelo 3D -->
+                </div>
+                <div class="media-content align-center">
+                    <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Observa tu Dentograma en 3D</h2>
+                    <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
+                        Podrás ver el estado de tus dientes a través de un modelo dental 3d
+                        con el que puedes interactuar, generado a partir del avance de tus tratamientos.</h3>
+                </div>
+            </div>   
+        </div>
+    </section>
+
+    <section class="countdown1 cid-rAyHAp7M3z mbr-parallax-background" id="seccion4">
+
+        <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(168, 168, 168);">
+        </div>
+        <div class="container">
+            <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Pronto estaremos contigo ...</h2>
+            <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">Recuerda seguirnos en redes sociales para más información</h3>
+        </div>
+        <div class="container countdown-cont align-center">
+            <div class="daysCountdown" title="Days"></div>
+            <div class="hoursCountdown" title="Hours"></div> 
+            <div class="minutesCountdown" title="Minutes"></div> 
+            <div class="secondsCountdown" title="Seconds"></div>
+            <div class="countdown pt-5 mt-2" data-due-date="2020/03/22">
+            </div>
+        </div>
+    </section>
+
+    <script src="/assets/three/three.min.js"></script>
+    <script src="/assets/three/OBJLoader.js"></script>
+    <script src="/assets/three/OrbitControls.js"></script>
+    <script>
+        var scene, camera, renderer;
+        var scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xE6FFFA);
+        var camera = new THREE.PerspectiveCamera(100,window.innerWidth*0.8/window.innerHeight*0.9, 1,5000);
+        camera.position.z = 4;
+        
+        scene.add( camera );
+
+        var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+        scene.add( ambientLight );
+        var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+        camera.add( pointLight );
+
+        
+        var diente;
+        var loader = new THREE.OBJLoader();
+
+        loader.load("assets/modelos/pre-Molar.obj", 
+        function(object){
+            object.traverse( function ( child ) {
+                if ( child instanceof THREE.Mesh ) {
+                    child.material = new THREE.MeshNormalMaterial();
+                }
+            });
+            object.position.y = -0.75;
+            scene.add(object);
+        });
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth*0.3,window.innerHeight*0.5);
+        var padre = document.getElementById("Modelo3d");
+        padre.appendChild(renderer.domElement);
+        
+        var controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.EnableZoom2 = false;
+        controls.update();
+        
+        var render = function(){
+            renderer.render(scene,camera);
+        }
+
+        var animate = function() {
+            camera.lookAt( scene.position );
+            requestAnimationFrame(animate);
+            controls.update();
+            render();
+        }
+        animate();
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#seccion1").css("min-height", $(window).height())
+            $("#seccion2").css("min-height", $(window).height())
+            $("#seccion3").css("min-height", $(window).height())
+        });
+    </script>
+<%- include layouts/footer.ejs %>

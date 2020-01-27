@@ -1,0 +1,23 @@
+{
+  "name": "sitioestudiente",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "ejs-lint": "^0.3.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.1-alpha.1",
+    "morgan": "~1.9.0",
+    "mysql": "^2.16.0",
+    "nodemailer": "^4.6.8",
+    "request": "^2.88.0",
+    "socket.io": "^2.2.0"
+  }
+}

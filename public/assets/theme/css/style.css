@@ -235,6 +235,8 @@ figure[mbr-media-size] {
 .card {
   background-color: transparent;
   border: none;
+  margin: 5px;
+  padding-bottom: 10px
 }
 
 .card-box {

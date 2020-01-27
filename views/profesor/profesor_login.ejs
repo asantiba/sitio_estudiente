@@ -1,0 +1,48 @@
+<%- include ../layouts/header.ejs %>
+
+<div class="container blog-content">
+    <div class="row" style="margin-top: 5%; margin-bottom: 10%">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Inicie sesión</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="form_profesor_login" method="post" role="form">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Correo institucional" id="email" name="email" type="text" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Contraseña" id="password" name="password" type="password" value="">
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Login<i class="fa fa-sign-in" style="margin-left: 5px"></i></button>
+                        <a class="btn btn-lg btn-success btn-block" href="/profesor/profesor_registrar">Registrar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.container -->
+
+<script type="text/javascript">
+    $("#form_profesor_login").on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({email: $("#email").val(), password: $("#password").val() }),
+            contentType: 'application/json',
+            url: '/profesor/profesor_login_confirm',
+            success: function(data){
+                if(data == "ok"){
+                    window.location.href = "/profesor/profesor_index";
+                } else if(data == "disable"){
+                    alert("Su usuario se encuentra inhabilitado.");
+                } else{
+                    alert("Datos de profesor incorrectos, su correo debe ser enviado por la universidad, intente nuevamente.");
+                }
+            }
+        });
+    });
+</script>
+
+<%- include ../layouts/footer.ejs %>
