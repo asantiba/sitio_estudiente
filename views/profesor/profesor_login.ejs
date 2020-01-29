@@ -10,10 +10,10 @@
                 <div class="panel-body">
                     <form id="form_profesor_login" method="post" role="form">
                         <div class="form-group">
-                            <input class="form-control" placeholder="Correo institucional" id="email" name="email" type="text" autofocus>
+                            <input class="form-control" placeholder="Correo institucional" id="email" name="email" type="text" required autofocus>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Contraseña" id="password" name="password" type="password" value="">
+                            <input class="form-control" placeholder="Contraseña" id="password" name="password" type="password" required>
                         </div>
                         <button type="submit" class="btn btn-lg btn-primary btn-block">Login<i class="fa fa-sign-in" style="margin-left: 5px"></i></button>
                         <a class="btn btn-lg btn-success btn-block" href="/profesor/profesor_registrar">Registrar</a>
@@ -33,9 +33,10 @@
             contentType: 'application/json',
             url: '/profesor/profesor_login_confirm',
             success: function(data){
-                if(data == "ok"){
+                if(data.msj == "ok"){
+                    console.log(data.data);
                     window.location.href = "/profesor/profesor_index";
-                } else if(data == "disable"){
+                } else if(data.msj == "disable"){
                     alert("Su usuario se encuentra inhabilitado.");
                 } else{
                     alert("Datos de profesor incorrectos, su correo debe ser enviado por la universidad, intente nuevamente.");

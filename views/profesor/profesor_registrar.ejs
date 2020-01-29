@@ -33,7 +33,6 @@
 <script type="text/javascript">
     $("#form_profesor_registrar").on('submit', function(e){
         e.preventDefault();
-        console.log("ruta enviada");
         $.ajax({
             type: 'POST',
             data: JSON.stringify({
