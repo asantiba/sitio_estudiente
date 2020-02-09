@@ -1,0 +1,61 @@
+<%- include ../layouts/profesor_header.ejs %>
+
+<div class="container blog-content" id="seccion1">
+
+    <div class="row">
+        <!-- Columna del medio -->
+        <div class="col-sm-12" id="central_col">
+            <div class="blog-main" id="asignaturas_dictadas">
+                <div class="sidebar-module">
+                    <div class="panel panel-default">
+                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Estudiantes de asignatura 
+                        </h4><br>
+                        <%if(data.length > 0){%>
+                            <table class="o_list_view table table-condensed table-striped o_list_view_ungrouped" id="tabla_asig" style="width: 100%;top: -7px">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Estudiante</th>
+                                        <th style="text-align: center;">Correo</th>
+                                        <th style="text-align: center;">Tratamientos</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ui-sortable" id="">
+                                    <%
+                                    for(var i=0; i < data.length; i++){
+                                    %>
+                                    <tr>
+                                        <td style="text-align: center;"><%=data[i].first_name%></th>
+                                        <td><%= data[i].email %></td>
+                                        <td style="padding: 2px; text-align: center;">
+                                            <button class="btn btn-primary btn-sm" data-idestudiante="<%=data[i].idestudiante%>" onclick='tratamientos_estudiante(this)' style="margin: 0; padding: 0;">
+                                                Tratamientos
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        <%} else {%>
+                            <h5 style="margin: 5px">Esta asignatura no tiene estudiantes inscritos.</h5>
+                        <%}%>
+                    </div>
+                </div><!-- /.blog-sidebar -->
+            </div>
+        </div>        
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        var largo = $(window).height();
+        $("#seccion1").css("min-height", largo-250)
+    });
+
+    function tratamientos_estudiante(ths){
+        window.location.href = '/profesor/tratamientos_estudiante/' + $(ths).data("idestudiante");
+    }
+
+</script>
+
+<%- include ../layouts/footer.ejs %>

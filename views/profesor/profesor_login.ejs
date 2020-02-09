@@ -2,7 +2,6 @@
 
 <div class="container blog-content">
     <div class="row" style="margin-top: 5%; margin-bottom: 10%">
-        <iframe width="1000" height="500" src="https://datastudio.google.com/embed/reporting/e75cd097-f9df-41f2-9777-fcafdd28bba4/page/Pi2CB" frameborder="0" style="border:0" allowfullscreen></iframe>
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
@@ -35,8 +34,15 @@
             url: '/profesor/profesor_login_confirm',
             success: function(data){
                 if(data.msj == "ok"){
-                    console.log(data.data);
-                    window.location.href = "/profesor/profesor_index";
+                    console.log(data.msj);
+                    date = new Date()
+                    semestre = "1";
+                    // Si es pasado julio
+                    if(date.getMonth()+1 > 7){
+                        semestre = "2";
+                    }
+                    periodo = date.getFullYear().toString() + "-" + semestre;
+                    window.location.href = "/profesor/profesor_index/" + periodo;
                 } else if(data.msj == "disable"){
                     alert("Su usuario se encuentra inhabilitado.");
                 } else{

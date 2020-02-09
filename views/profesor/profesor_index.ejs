@@ -2,9 +2,9 @@
 
 <div class="container blog-content" id="seccion1">
 
-    <div class="row" style="margin: 5%">
+    <div class="row">
         <!-- Columna del medio -->
-        <div class="col-sm-8" id="central_col">
+        <div class="col-sm-12" id="central_col">
             <div class="blog-main" id="asignaturas_dictadas">
                 <div class="sidebar-module">
                     <div class="panel panel-default">
@@ -12,7 +12,7 @@
                         </h4><br>
                         <div class="pull-right" style="width: 100px; margin-right: 5px">
                             <form id="form_periodo">
-                                <select name="periodo" class="form-control" onchange="get_asignaturas_dictadas()">
+                                <select id="periodo" class="form-control" onchange="get_asignaturas_dictadas()">
                                     <%
                                     anio_inicio = 2020;
                                     anio_actual = parseInt(new Date().getFullYear());
@@ -28,27 +28,29 @@
                         <table class="o_list_view table table-condensed table-striped o_list_view_ungrouped" id="tabla_asig" style="width: 100%;top: -7px">
                             <thead>
                                 <tr>
-                                    <th id="" class="cabecera" style="text-align: center;">Asignatura</th>
-                                    <th id="" class="cabecera" style="text-align: center;">Descripción</th>
-                                    <th id="" class="cabecera" style="text-align: center;">Numero de estudiantes</th>
-                                    <th id="" class="cabecera" style="text-align: center;">Opciones</th>
+                                    <th style="text-align: center;">Asignatura</th>
+                                    <th style="text-align: center;">Periodo</th>
+                                    <th style="text-align: center;">Descripción</th>
+                                    <th style="text-align: center;">Numero de estudiantes</th>
+                                    <th style="text-align: center;">Opciones</th>
                                 </tr>
                             </thead>
-                            <tbody class="ui-sortable" id="data_inventario">
+                            <tbody class="ui-sortable" id="">
                                 <%
                                 for(var i=0; i < data.length; i++){
                                 %>
                                 <tr>
                                     <td style="text-align: center;" class="semana"><%=data[i].asignatura%></th>
+                                    <td><%= data[i].periodo %></td>
                                     <td><%= data[i].descripcion %></td>
                                     <td style="text-align: center;"><%= data[i].cant_estudiantes%></td>
                                     <td style="padding: 2px">
-                                        <button class="btn btn-primary btn-sm" data-idasignatura_dictada="<%=data[i].idasignatura%>" style="margin: 0; padding: 0;">
+                                        <button class="btn btn-primary btn-sm" data-idasignatura_dictada="<%=data[i].idasignatura%>" onclick='estudiantes_asignatura(this)' style="margin: 0; padding: 0;">
                                             Estudiantes
                                         </button>
-                                        <button class="btn btn-primary btn-sm" data-idasignatura="<%=data[i].idasignatura%>" onclick='desinscribir_asignatura(this)' style="margin: 0; padding: 0;">
+                                        <!-- <button class="btn btn-primary btn-sm" data-idasignatura="<%=data[i].idasignatura%>" onclick='desinscribir_asignatura(this)' style="margin: 0; padding: 0;">
                                             Desinscribir
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                                 <%}%>
@@ -60,30 +62,47 @@
         </div>
 
         <!-- Columna derecha -->
-        <div class="col-sm-4 blog-sidebar" id="right_col">
+        <!-- <div class="col-sm-4 blog-sidebar" id="right_col">
             <div class="sidebar-module">
                 <div class="panel panel-default">
                     <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 3px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Información de utilidad</h4>
-                    <p style="margin: 10px">Nuevos casos de infeccion de coronavirus en Peru.</p>
+                    <h5 style="margin: 10px">Nuevos casos de infeccion de coronavirus en Peru.</h5>
                     <br>
                 </div>
-            </div><!-- /.blog-sidebar -->
-        </div><!-- /.columna derecha -->
+            </div>
+        </div>
+        <br> -->
+        
+        <!-- Datos estadisticos -->
+        <!-- <div class="col-sm-12">
+            <div class="blog-main" id="asignaturas_dictadas">
+                <div class="sidebar-module">
+                    <div class="panel panel-default">
+                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Análisis estadístico
+                        </h4><br>
+                        <iframe width="1000" height="500" src="https://datastudio.google.com/embed/reporting/e75cd097-f9df-41f2-9777-fcafdd28bba4/page/Pi2CB" frameborder="5" style="border:0; width: 100%" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
     </div><!-- /.row -->
 </div><!-- /.container -->
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#seccion1").css("min-height", $(window).height())
+        $("#seccion1").css("min-height", $(window).height());
+        console.log("<%=periodo%>");
+        $("#periodo").val("<%=periodo%>");
     });
 
-    function desinscribir_asignatura(ths){
-        
+    function estudiantes_asignatura(ths){
+        window.location.href = '/profesor/estudiantes_asignatura/' + $(ths).data("idasignatura_dictada");
     }
 
     function get_asignaturas_dictadas(){
         var periodo = $("#form_periodo :selected").val();
-        window.location.href = "/profesor/get_asignaturas_dictadas/" + periodo;
+        window.location.href = "/profesor/profesor_index/" + periodo;
     }
 </script>
 

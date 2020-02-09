@@ -1,0 +1,72 @@
+<%- include ../layouts/profesor_header.ejs %>
+
+<div class="container blog-content" id="seccion1">
+
+    <div class="row">
+        <!-- Columna del medio -->
+        <div class="col-sm-12" id="central_col">
+            <div class="blog-main" id="asignaturas_dictadas">
+                <div class="sidebar-module">
+                    <div class="panel panel-default">
+                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Información de Tratamiento
+                        </h4><br>
+                        <%if(data){%>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ui-sortable" id="">
+                                    <tr>
+                                        <td><h5 style="margin: 5px">Tratamiento:</h5></td>
+                                        <td><h5 style="margin: 5px"><%=data.tratamiento%>.</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h5 style="margin: 5px">Descripcion:</h5></td>
+                                        <td><h5 style="margin: 5px"><%=data.descripcion%></h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h5 style="margin: 5px">Estudiante:</h5></td>
+                                        <td><h5 style="margin: 5px"><%=data.first_name%>.</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h5 style="margin: 5px">Estado:</h5></td>
+                                        <td>
+                                            <h5 style="margin: 5px"> 
+                                                <%if(data.habilitado == 0){%>
+                                                    Finalizado.
+                                                <%} else{ %>
+                                                    En proceso.
+                                                <%}%>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                    <%if(data.votacion){%>
+                                        <tr>
+                                            <td><h5 style="margin: 5px">Calificación:</h5></td>
+                                            <td><h5 style="margin: 5px"><%=data.comentario%> Puntaje: <%=data.votacion%> pts.</h5></td>
+                                        </tr>
+                                    <%}%>
+                                </tbody>                                
+                            </table>
+                            <br>
+                        <%}%>
+                    </div>
+                </div><!-- /.blog-sidebar -->
+            </div>
+        </div>        
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        var largo = $(window).height();
+        $("#seccion1").css("min-height", largo-250)
+    });
+
+</script>
+
+<%- include ../layouts/footer.ejs %>

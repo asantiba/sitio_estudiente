@@ -33,23 +33,29 @@
 <script type="text/javascript">
     $("#form_profesor_registrar").on('submit', function(e){
         e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify({
-                first_name: $("#first_name").val(), email: $("#email").val(), password: $("#password").val() }),
-            contentType: 'application/json',
-            url: '/profesor/profesor_registrar_confirm',
-            success: function(data){
-                if(data.msj == "ok"){
-                    alert(data.data)
-                    // window.location.href = "/profesor/profesor_index";
-                } else if(data.msj == "deshabilitado"){
-                    alert("Su cuenta se encuentra inhabilitada.");
-                } else{
-                    alert("Datos de profesor incorrectos, su correo debe ser enviado por la universidad, intente nuevamente.");
+        if($("#password").val() === $("#password_confirm").val()){
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify({
+                    first_name: $("#first_name").val(), 
+                    email: $("#email").val(), 
+                    password: $("#password").val() }),
+                contentType: 'application/json',
+                url: '/profesor/profesor_registrar_confirm',
+                success: function(data){
+                    if(data.msj == "ok"){
+                        alert(data.msj)
+                        window.location.href = "/profesor/profesor_index";
+                    } else if(data.msj == "deshabilitado"){
+                        alert("Su cuenta se encuentra inhabilitada.");
+                    } else{
+                        alert("Datos de profesor incorrectos, su correo debe ser enviado por la universidad, intente nuevamente.");
+                    }
                 }
-            }
-        });
+            });
+        } else{
+            alert("Sus contraseñas no coinciden.");
+        }
     });
 </script>
 

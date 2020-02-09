@@ -1,0 +1,73 @@
+<%- include ../layouts/profesor_header.ejs %>
+
+<div class="container blog-content" id="seccion1">
+
+    <div class="row">
+        <!-- Columna del medio -->
+        <div class="col-sm-12" id="central_col">
+            <div class="blog-main" id="asignaturas_dictadas">
+                <div class="sidebar-module">
+                    <div class="panel panel-default">
+                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Tratamientos <%if(data.length > 0){%>
+                            de <%=data[0].first_name%>
+                        <%}%>
+                        </h4><br>
+                        <%if(data.length > 0){%>
+                            <table class="o_list_view table table-condensed table-striped o_list_view_ungrouped" id="tabla_asig" style="width: 100%;top: -7px">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Tratamiento</th>
+                                        <th style="text-align: center;">Tipo de Tratamiento</th>
+                                        <th style="text-align: center;">Descripción</th>
+                                        <th style="text-align: center;">Finalizado</th>
+                                        <th style="text-align: center;">Detalle</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ui-sortable" id="">
+                                    <%
+                                    for(var i=0; i < data.length; i++){
+                                    %>
+                                    <tr>
+                                        <td style="text-align: center;"><%=data[i].tratamiento%></th>
+                                        <td style="text-align: center;"><%= data[i].tipo_tratamiento %></td>
+                                        <td><%= data[i].descripcion %></td>
+                                        <td style="text-align: center;">
+                                        <%if(data[i].habilitado == 0){%>
+                                            Finalizado
+                                        <%} else{ %>
+                                            En proceso
+                                        <%}%>
+                                        </td>
+                                        <td style="padding: 2px; text-align: center;">
+                                            <button class="btn btn-primary btn-sm" data-idtratamiento_asignado="<%=data[i].idtratamiento_asignado%>" onclick='tratamiento_estudiante(this)' style="margin: 0; padding: 0;">
+                                                Detalle
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        <%} else {%>
+                            <h5 style="margin: 5px">Este estudiante no ha realizado tratamientos.</h5>
+                        <%}%>
+                    </div>
+                </div><!-- /.blog-sidebar -->
+            </div>
+        </div>        
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        var largo = $(window).height();
+        $("#seccion1").css("min-height", largo-150)
+    });
+
+    function tratamiento_estudiante(ths){
+        window.location.href = '/profesor/tratamiento_estudiante/' + $(ths).data("idtratamiento_asignado");
+    }
+
+</script>
+
+<%- include ../layouts/footer.ejs %>
