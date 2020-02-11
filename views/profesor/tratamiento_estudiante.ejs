@@ -46,7 +46,16 @@
                                     <%if(data.votacion){%>
                                         <tr>
                                             <td><h5 style="margin: 5px">Calificación:</h5></td>
-                                            <td><h5 style="margin: 5px"><%=data.comentario%> Puntaje: <%=data.votacion%> pts.</h5></td>
+                                            <td><h5 style="margin: 5px"><%=data.votacion%> pts. Comentario: <%=data.comentario%></h5></td>
+                                        </tr>
+                                    <%} else{ %>
+                                        <tr>
+                                            <td><h5 style="margin: 5px">Sin Calificación:</h5></td>
+                                            <td style="margin: 5px">
+                                                <button class="btn btn-primary btn-sm" data-idtratamiento_asignado="<%=data.idtratamiento_asignado%>" onclick='evaluacion_tratamiento()' style="margin: 0; padding: 0;">
+                                                    Calificar
+                                                </button>
+                                            </td>
                                         </tr>
                                     <%}%>
                                 </tbody>                                
@@ -60,11 +69,76 @@
     </div><!-- /.row -->
 </div><!-- /.container -->
 
+<!-- Crear evaluacion como profesor-->
+<div class="modal fade" id="modal_evaluacion" tabindex="-1" role="dialog" >
+    <div class="modal-dialog">
+        <form id="form_evaluacion_tratamiento">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h5>Añadir evaluación</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label>Calificación</label>
+                        <input style="" type="number" id="votacion" name="votacion" class="form-control" min=0 max=100 autofocus required>
+                    </div>
+                    <div class="input-group">
+                        <label>Comentario</label>
+                        <textarea id="comentario" class="form-control" name="comentario" cols="80" rows="1"></textarea>
+                    </div>
+                    <div>
+                        <input type="text" style="visibility: hidden" name="idtratamiento_asignado" id="idtratamiento_asignado" value="<%=data.idtratamiento_asignado%>">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button" style="padding: 0">Cancelar</button>
+                        <button class="btn btn-primary" type="submit">Calificar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script type="text/javascript">
 
     $(document).ready(function(){
         var largo = $(window).height();
-        $("#seccion1").css("min-height", largo-250)
+        $("#seccion1").css("min-height", largo-250);
+    });
+
+    // Muestra/oculta evaluar tratamiento
+    function evaluacion_tratamiento(){
+        $("#modal_evaluacion").modal("show");
+        // if($("#container_evaluacion").css("display") == "none"){
+        //     $("#container_evaluacion").css("display","block");
+        // } else {
+        //     $("#container_evaluacion").css("display","none");
+        // }
+    }
+
+    $("#form_evaluacion_tratamiento").on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({idtratamiento_asignado: $("#idtratamiento_asignado").val(), votacion: parseInt($("#votacion").val()), comentario: $("#comentario").val() }),
+            contentType: 'application/json',
+            url: '/profesor/evaluacion_tratamiento',
+            success: function(data){
+                if(data.msj == "ok"){
+                    console.log("evaluacion exitosa");
+                    window.location.href = "/profesor/tratamiento_estudiante/" + data.idtratamiento_asignado;
+                } else{
+                    alert("Error al ingresar la calificación, intente nuevamente.");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
     });
 
 </script>

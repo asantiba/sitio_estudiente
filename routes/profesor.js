@@ -188,6 +188,42 @@ router.get('/tratamiento_estudiante/:idasignatura_asignada', function(req, res, 
     }
 });
 
+/* Ingresa una evaluacion de tratamiento a un estudiante */
+router.post('/evaluacion_tratamiento', function(req, res, next) {
+    if(req.session.profesorLogged == true){
+        var input = JSON.parse(JSON.stringify(req.body));
+        // Se hace la consulta a la api de estudiente
+        try {
+            Request.post({
+                "headers": { "content-type": "application/json" },
+                "url": "http://52.14.108.19:8000/evaluacion_tratamiento/",
+                "body": JSON.stringify({
+                    "idtratamiento_asignado": parseInt(input.idtratamiento_asignado),
+                    "votacion": parseInt(input.votacion),
+                    "comentario": input.comentario,
+                    "votante": "profesor",
+                    "publico": 1,
+                    "cuestionario": {}
+                })
+            }, (error, response, body) => {
+                if(error) {
+                    return console.log(error);
+                } else{
+                    body = JSON.parse(body);
+                    if(body["msj"] == "Tratamiento evaluado correctamente."){
+                        console.log("entra");
+                        res.send({msj: "ok", idtratamiento_asignado:parseInt(input.idtratamiento_asignado) });
+                    } else{
+                        res.send({msj: "error"});
+                    }
+                }
+            });
+        } catch(error) {
+            console.error(error);
+        }
+    }
+});
+
 function get_periodo_actual(){
     date = new Date()
     semestre = "1";
