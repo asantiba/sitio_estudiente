@@ -125,6 +125,94 @@ router.post('/profesor_registrar_confirm', function(req, res, next) {
     }
 });
 
+/* Entrega las asignaturas que no estoy inscrito segun el periodo */
+router.get('/inscribir_asignatura/:periodo', function(req, res, next) {
+    if(req.session.profesorLogged != null && req.session.profesorLogged == true){
+        periodo = req.params.periodo.toString();
+        idprofesor = req.session.profesorData["idprofesor"].toString();
+        // Consulta a la api los estudiantes de esa asignatura en ese periodos
+        Request.get("http://52.14.108.19:8000/get_asignaturas/" + idprofesor + "/" + periodo, (error, response, body) => {
+            if(error) {
+                return console.log(error);
+                res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+            } else{
+                data = JSON.parse(body);
+                console.log(data);
+                res.render('profesor/inscribir_asignatura', { is_login: req.session.profesorLogged, data: data, periodo: periodo});
+            }
+        });
+    } else {
+        // Si no, lo redirige a una vista donde solo puede ver el recurso sin detalles
+        res.render('profesor/profesor_registrar', {});
+    }
+});
+
+/* Ingresa una asignatura a las asignaturas de un profesor */
+router.post('/inscribir_asignatura', function(req, res, next) {
+    if(req.session.profesorLogged == true){
+        var input = JSON.parse(JSON.stringify(req.body));
+        idprofesor = req.session.profesorData["idprofesor"].toString();
+        // Se hace la consulta a la api de estudiente
+        try {
+            Request.post({
+                "headers": { "content-type": "application/json" },
+                "url": "http://52.14.108.19:8000/inscribir_asignatura/",
+                "body": JSON.stringify({
+                    "idprofesor": idprofesor,
+                    "idasignatura": parseInt(input.idasignatura),
+                    "periodo": input.periodo
+                })
+            }, (error, response, body) => {
+                if(error) {
+                    return console.log(error);
+                } else{
+                    body = JSON.parse(body);
+                    if(body["msj"] == "Se ha inscrito su asignatura."){
+                        res.send({msj: "ok"});
+                    } else{
+                        res.send({msj: "error"});
+                    }
+                }
+            });
+        } catch(error) {
+            console.error(error);
+        }
+    }
+});
+
+/* Ingresa una asignatura a las asignaturas de un profesor */
+router.post('/desinscribir_asignatura', function(req, res, next) {
+    if(req.session.profesorLogged == true){
+        var input = JSON.parse(JSON.stringify(req.body));
+        idprofesor = req.session.profesorData["idprofesor"].toString();
+        // Se hace la consulta a la api de estudiente
+        try {
+            Request.post({
+                "headers": { "content-type": "application/json" },
+                "url": "http://52.14.108.19:8000/desinscribir_asignatura/",
+                "body": JSON.stringify({
+                    "idprofesor": idprofesor,
+                    "idasignatura": parseInt(input.idasignatura),
+                    "periodo": input.periodo
+                })
+            }, (error, response, body) => {
+                if(error) {
+                    return console.log(error);
+                } else{
+                    body = JSON.parse(body);
+                    if(body["msj"] == "Se ha desinscrito su asignatura."){
+                        res.send({msj: "ok"});
+                    } else{
+                        res.send({msj: "error"});
+                    }
+                }
+            });
+        } catch(error) {
+            console.error(error);
+        }
+    }
+});
+
 /* Entrega los estudiantes que hay en una asignatura */
 router.get('/estudiantes_asignatura/:idasignatura_asignada', function(req, res, next) {
     if(req.session.profesorLogged != null && req.session.profesorLogged == true){
@@ -221,6 +309,27 @@ router.post('/evaluacion_tratamiento', function(req, res, next) {
         } catch(error) {
             console.error(error);
         }
+    }
+});
+
+/* Entrega los estudiantes que hay en una asignatura */
+router.get('/perfil_estudiante/:idestudiante', function(req, res, next) {
+    if(req.session.profesorLogged != null && req.session.profesorLogged == true){
+        idestudiante = req.params.idestudiante.toString();
+        // Consulta a la api los estudiantes de esa asignatura en ese periodos
+        Request.get("http://52.14.108.19:8000/get_estudiante/" + idestudiante, (error, response, body) => {
+            if(error) {
+                return console.log(error);
+                res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+            } else{
+                data = JSON.parse(body);
+                console.log(data);
+                res.render('profesor/perfil_estudiante', { is_login: req.session.profesorLogged, data: data});
+            }
+        });
+    } else {
+        // Si no, lo redirige a una vista donde solo puede ver el recurso sin detalles
+        res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
     }
 });
 

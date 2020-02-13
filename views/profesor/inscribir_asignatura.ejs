@@ -8,11 +8,11 @@
             <div class="blog-main" id="asignaturas_dictadas">
                 <div class="sidebar-module">
                     <div class="panel panel-default">
-                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Mis Asignaturas
+                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Inscribir asignatura
                         </h4><br>
                         <div class="pull-right" style="width: 100px; margin-right: 5px">
                             <form id="form_periodo">
-                                <select id="periodo" class="form-control" onchange="get_asignaturas_dictadas()">
+                                <select id="periodo" class="form-control" onchange="get_asignaturas_no_dictadas()">
                                     <%
                                     anio_inicio = 2020;
                                     fecha = new Date();
@@ -45,15 +45,12 @@
                                     %>
                                     <tr>
                                         <td style="text-align: center;" class="semana"><%=data[i].asignatura%></th>
-                                        <td style="text-align: center;"><%= data[i].periodo %></td>
+                                        <td style="text-align: center;"><%= periodo %></td>
                                         <td style="text-align: center;"><%= data[i].descripcion %></td>
                                         <td style="text-align: center;"><%= data[i].cant_estudiantes%></td>
                                         <td style="padding: 2px">
-                                            <button class="btn btn-primary btn-sm" data-idasignatura_dictada="<%=data[i].idasignatura%>" onclick='estudiantes_asignatura(this)' style="margin: 0; padding: 0;">
-                                                Estudiantes
-                                            </button>
-                                            <button class="btn btn-secondary btn-md desinscribir_asignatura" data-idasignatura="<%=data[i].idasignatura%>" style="margin: 0; padding: 0;">
-                                                <i style="font-size:18px" class="fa fa-trash"></i>
+                                            <button class="btn btn-success btn-sm" id="btn_inscribir" data-idasignatura="<%=data[i].idasignatura%>" style="margin: 0; padding: 0;">
+                                                Inscribir
                                             </button>
                                         </td>
                                     </tr>
@@ -61,43 +58,17 @@
                                 </tbody>
                             </table>
                         <%} else {%>
-                            <h5 style="margin: 5px; margin-top: 20px">No posee asignaturas inscritas.</h5>
+                            <h5 style="margin: 5px; margin-top: 20px">No hay asignaturas por inscribir.</h5>
                         <%}%>
                         <div class="pull-right">
-                            <button class="btn btn-success btn-md" onclick='inscribir_asignatura(this)' style="margin-top: 10px !important; padding: 0;">
-                                Inscribir asignatura
+                            <button class="btn btn-secondary btn-md" onclick='volver(this)' style="margin-top: 10px !important; padding: 0;">
+                                Cancelar
                             </button>
                         </div>
                     </div>
                 </div><!-- /.blog-sidebar -->
             </div>
         </div>
-
-        <!-- Columna derecha -->
-        <!-- <div class="col-sm-4 blog-sidebar" id="right_col">
-            <div class="sidebar-module">
-                <div class="panel panel-default">
-                    <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 3px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Información de utilidad</h4>
-                    <h5 style="margin: 10px">Nuevos casos de infeccion de coronavirus en Peru.</h5>
-                    <br>
-                </div>
-            </div>
-        </div>
-        <br> -->
-        
-        <!-- Datos estadisticos -->
-        <!-- <div class="col-sm-12">
-            <div class="blog-main" id="asignaturas_dictadas">
-                <div class="sidebar-module">
-                    <div class="panel panel-default">
-                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> Análisis estadístico
-                        </h4><br>
-                        <iframe width="1000" height="500" src="https://datastudio.google.com/embed/reporting/e75cd097-f9df-41f2-9777-fcafdd28bba4/page/Pi2CB" frameborder="5" style="border:0; width: 100%" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        
     </div><!-- /.row -->
 </div><!-- /.container -->
 
@@ -105,35 +76,31 @@
     $(document).ready(function(){
         var largo = $(window).height();
         $("#seccion1").css("min-height", largo-250)
-        console.log("<%=periodo%>");
+        // console.log("<%=periodo%>");
         $("#periodo").val("<%=periodo%>");
     });
 
-    function estudiantes_asignatura(ths){
-        window.location.href = '/profesor/estudiantes_asignatura/' + $(ths).data("idasignatura_dictada");
+    function volver(ths){
+        var periodo = $("#form_periodo :selected").val();
+        window.location.href = '/profesor/profesor_index/' + periodo;
     }
 
-    function get_asignaturas_dictadas(){
-        var periodo = $("#form_periodo :selected").val();
-        window.location.href = "/profesor/profesor_index/" + periodo;
-    }
-    
-    function inscribir_asignatura(){
+    function get_asignaturas_no_dictadas(){
         var periodo = $("#form_periodo :selected").val();
         window.location.href = "/profesor/inscribir_asignatura/" + periodo;
     }
-
-    $(".desinscribir_asignatura").on('click',function(e){
+    
+    $("#btn_inscribir").on('click',function(e){
         e.preventDefault();
         var periodo = $("#form_periodo :selected").val();
         $.ajax({
             type: 'POST',
-            data: JSON.stringify({idasignatura: $(this).data("idasignatura"), periodo: periodo }),
+            data: JSON.stringify({idasignatura: $("#btn_inscribir").data("idasignatura"), periodo: periodo }),
             contentType: 'application/json',
             url: '/profesor/inscribir_asignatura',
             success: function(data){
                 if(data.msj == "ok"){
-                    window.location.href = "/profesor/profesor_index/" + periodo;
+                    window.location.href = "/profesor/inscribir_asignatura/" + periodo;
                 } else{
                     alert("Error al ingresar la calificación, intente nuevamente.");
                 }
