@@ -24,8 +24,10 @@
                                     for(var i=0; i < data.length; i++){
                                     %>
                                     <tr>
-                                        <td style="text-align: center;"><%=data[i].first_name%></th>
-                                        <td><%= data[i].email %></td>
+                                        <td>
+                                            <a style="margin-left: 35%;" class="nav-link link" href="/profesor/perfil_estudiante/<%=data[i].idestudiante%>"><i style="" class="fa fa-user-circle"></i> <%=data[i].first_name%></a>
+                                        </th>
+                                        <td style="text-align: center;"><%= data[i].email %></td>
                                         <td style="padding: 2px; text-align: center;">
                                             <button class="btn btn-primary btn-sm" data-idestudiante="<%=data[i].idestudiante%>" onclick='tratamientos_estudiante(this)' style="margin: 0; padding: 0;">
                                                 Tratamientos

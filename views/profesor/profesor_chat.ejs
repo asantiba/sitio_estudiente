@@ -1,0 +1,151 @@
+<%- include ../layouts/profesor_header.ejs %>
+
+<div class="container blog-content" id="seccion1">
+    <div class="panel panel-default" style="padding: 15px; margin-bottom: 0; min-height: 400px; max-height: 400px">
+        <h4 class="h4_title"><%=nombre_usuario%></h4><br>
+        <div class="section" id="mensajes" style="height: 250px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row" id="row_mensajes">
+            <%
+            if(data.length > 0){
+                for(var i=0; i < data.length; i++){
+                    var fecha = data[i].fgen.split("T")[0].split("-");
+                    var str_fecha = fecha[2].toString() + "/" + fecha[1] + "/" + fecha[0];
+                    var hora = data[i].fgen.split("T")[1].split("Z")[0].split(":");
+                    str_hora = hora[0] + ":" + hora[1]
+                    %>
+                    <% if(idusuario_prof != data[i].idemisor){ %>
+                        <div class="col-sm-5">
+                            <div class="panel panel-default" style="padding: 5px; margin-bottom: 0">
+                                <div class="row">
+                                    <div class="col-sm-8" style="">
+                                        <a class="nav-link link" href="/profesor/perfil_paciente/<%=data[i].idusuario%>">
+                                            <h5><i style="" class="fa fa-user-circle"></i> <%=data[i].nombre_emisor%></h5>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <%=str_fecha%>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <p style="color: black"><%=str_hora%> - <%=data[i].mensaje%></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-7"></div>
+                    <% } else { %>
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-5">
+                            <div class="panel panel-default" style="padding: 5px; margin-bottom: 0">
+                                <div class="row">
+                                    <div class="col-sm-8" style="">
+                                        <a class="nav-link link" href="/profesor/perfil_paciente/<%=data[i].idusuario%>">
+                                            <h5><i style="" class="fa fa-user-circle"></i> <%=data[i].nombre_emisor%></h5>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <%=str_fecha%>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <p style="color: black"><%=str_hora%> - <%=data[i].mensaje%></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <%}
+            }%>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <form id="form_chat" style="bottom: 10%; position: absolute; width: 90%; left: 10%">
+            <div class="input-group" style="width: 90%">
+                <div style="display: inline-flex; width: 100%">
+                    <input placeholder="Enviar mensaje..." type="text" id="mensaje" name="mensaje" class="form-control" autofocus required>
+                    <button class="btn btn-sm" style="margin: 0;" type="submit"><i class="fa fa-send-o" style="font-size: 18px"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div><!-- /.container -->
+
+<style>
+    .h4_title{
+        font-weight: 600; 
+        padding: 10px; 
+        margin-left: 5px; 
+        margin-right: 5px; 
+        margin-bottom: 2px; 
+        text-align: center; 
+        padding-bottom: 5px; 
+        border-bottom: solid #289B89;
+    }
+</style>
+
+<!-- Socket para envio de notificaciones y mensajes -->
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var largo = $(window).height();
+        $("#seccion1").css("min-height", largo-150)
+        var objDiv = document.getElementById("mensajes");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    });
+    
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on('connect', function(){
+        // Envia al server a la funcion socket join_room la sala a la que se quiere ingresar
+        socket.emit('join_room', "ashd$j717s2983427?h234234fhsd&3gf#<%=idusuario%>$<%=idusuario_prof%>");
+    });
+
+    socket.on('updatechat', function(data) {
+        console.log(data);
+        fecha_msj = new Date();
+        console.log(fecha_msj.toString());
+        $("#row_mensajes").append(
+            "<div class='col-sm-5'><div class='panel panel-default' style='padding: 5px; margin-bottom: 0'><div class='row'><div class='col-sm-8' style=''><a class='nav-link link' href='/profesor/perfil_paciente/<%=idusuario%>'><h5><i style='' class='fa fa-user-circle'></i> <%=nombre_usuario%></h5></a></div><div class='col-sm-4'>" + fecha_msj + "</div><div class='col-sm-12'><p style='color: black'>12:09 - " + data + "</p></div></div></div></div><div class='col-sm-7'></div>");
+        var objDiv = document.getElementById("mensajes");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    });
+
+    $("#form_chat").on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({
+                id_receptor: "<%=idusuario%>", 
+                mensaje: $("#mensaje").val() 
+            }),
+            contentType: 'application/json',
+            url: '/profesor/guardar_msj',
+            success: function(data){
+                if(data.msj == "ok"){
+                    // Envio msj por socket
+                    socket.emit('sendmsj', $("#mensaje").val());
+                    window.location.href = "/profesor/profesor_chat/<%=idusuario%>";
+                } else{
+                    alert("Error al enviar mensaje, intente nuevamente.");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+    });
+
+    // Antes de salir de la pagina desconectar socket
+    $(window).on("beforeunload", function(evt) {
+
+        // Cancel the event (if necessary)
+        evt.preventDefault();
+        socket.emit('disconnect');
+        // Google Chrome requires returnValue to be set
+        evt.returnValue = '';
+
+        return null;
+    });
+
+</script>
+
+<%- include ../layouts/footer.ejs %>

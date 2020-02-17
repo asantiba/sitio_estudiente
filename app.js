@@ -58,6 +58,6 @@ app.use(function(err, req, res, next) {
 });
 
 var server  = http.createServer(app);
-app.set('port', process.env.PORT || '3000');
+app.set('port', process.env.PORT || '3001');
 
 module.exports = app;

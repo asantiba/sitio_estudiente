@@ -9,17 +9,17 @@
         </div>
         <div class="col-sm-10" style="">
             <div class="pull-right">
-                <button class="btn btn-primary btn-sm" onclick='profesor_chat(this)' data-idusuario="<%= data.idusuario %>" style="margin: 5px !important; padding: 0;">
+                <button class="btn btn-primary btn-sm" onclick='profesor_chat(this)' data-idusuario="<%= data.idusuario %>" style="margin-top: 10px !important; padding: 0;">
                     Enviar Mensaje
                 </button>
-                <button class="btn btn-secondary btn-sm" onclick='denunciar_estudiante()' style="margin: 5px !important; padding: 0;">
+                <button class="btn btn-secondary btn-sm" onclick='denunciar_paciente()' style="margin-top: 10px !important; padding: 0;">
                     Denunciar
                 </button>
             </div>
             <h2 style="margin-top: 10px"><%=data.first_name%></h2><br>
             <div class="panel panel-default" style="padding: 5px">
                 <h4>
-                    Información del estudiante
+                    Información del paciente
                 </h4>
                 <table>
                     <thead>
@@ -30,16 +30,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><h5>Rut:</h5></th>
-                            <td><h5><%= data.rut %></h5></th>
-                        </tr>
-                        <tr>
                             <td><h5>Correo:</h5></th>
                             <td><h5><%= data.email %></h5></th>
-                        </tr>
-                        <tr>
-                            <td><h5>Universidad:</h5></th>
-                            <td><h5><%= data.nombre %></h5></th>
                         </tr>
                         <tr>
                             <td><h5>Estado:</h5></th>
@@ -70,68 +62,6 @@
             </div>
         </div>
         <div class="col-sm-12" id="central_col" style="margin-top: 10px">
-            <!-- Asignaturas inscritas -->
-            <div class="panel panel-default">
-                <h4 class="h4_title">
-                    Asignaturas
-                </h4><br>
-                <%if(data.asignaturas_inscritas.length > 0){%>
-                    <table class="o_list_view table table-condensed table-striped o_list_view_ungrouped" id="tabla_asig" style="width: 100%;top: -7px">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; width: 50%">Asignatura</th>
-                                <th style="text-align: center;">Periodo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                            for(var i=0; i < data.asignaturas_inscritas.length; i++){
-                            %>
-                            <tr>
-                                <td style="text-align: center;"><%=data.asignaturas_inscritas[i].asignatura%></th>
-                                <td style="text-align: center;"><%= data.asignaturas_inscritas[i].periodo %></td>
-                            </tr>
-                            <%}%>
-                        </tbody>
-                    </table>
-                <%} else {%>
-                    <h5 style="margin: 5px">No posee asignaturas inscritas.</h5>
-                <%}%>
-            </div>
-            <!-- Tratamientos ofrecidos -->
-            <div class="panel panel-default">
-                <h4 class="h4_title">
-                    Tratamientos Aprendidos
-                </h4><br>
-                <%if(data.tratamiento_ofrecido.length > 0){%>
-                    <table class="o_list_view table table-condensed table-striped o_list_view_ungrouped" id="tabla_asig" style="width: 100%;top: -7px">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; width: 50%">Tratamiento</th>
-                                <th style="text-align: center;">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                            for(var i=0; i < data.tratamiento_ofrecido.length; i++){
-                            %>
-                            <tr>
-                                <td style="text-align: center;"><%=data.tratamiento_ofrecido[i].tratamiento%></th>
-                                <td style="text-align: center;">
-                                    <%if(data.tratamiento_ofrecido[i].habilitado == 1){ %>
-                                        Disponible para pacientes
-                                    <%} else { %>
-                                        No disponible para pacientes
-                                    <%}%>
-                                </th>
-                            </tr>
-                            <%}%>
-                        </tbody>
-                    </table>
-                <%} else {%>
-                    <h5 style="margin: 5px">No posee tratamientos ofrecidos.</h5>
-                <%}%>
-            </div>
             <!-- Tratamientos asignados -->
             <div class="panel panel-default">
                 <h4 class="h4_title">
@@ -175,36 +105,6 @@
                     <h5 style="margin: 5px">No posee tratamientos realizados.</h5>
                 <%}%>
             </div>
-            <div class="panel panel-default">
-                <!-- Logros -->
-                <h4 class="h4_title">
-                    Logros
-                </h4><br>
-                <%if(data.logros.length > 0){%>
-                    <table class="o_list_view table table-condensed table-striped o_list_view_ungrouped" id="tabla_asig" style="width: 100%;top: -7px">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; width: 40%">Logro</th>
-                                <th style="text-align: center;">Descripción</th>
-                                <th style="text-align: center;">Cumplido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                            for(var i=0; i < data.logros.length; i++){
-                            %>
-                            <tr>
-                                <td style="text-align: center;"><%=data.logros[i].logro%></th>
-                                <td style="text-align: center;"><%= data.logros[i].descripcion %></td>
-                                <td style="text-align: center;"><%= data.logros[i].condicion %></td>
-                            </tr>
-                            <%}%>
-                        </tbody>
-                    </table>
-                <%} else {%>
-                    <h5 style="margin: 5px">No posee logros.</h5>
-                <%}%>
-            </div>
         </div>
 
         <!-- Columna derecha -->
@@ -212,7 +112,7 @@
             <div class="sidebar-module">
                 <div class="panel panel-default">
                     <h4 class="h4_title"> Actividad reciente</h4>
-                    <h5 style="margin: 10px">Estudiante ha avanzado en 2 tratamientos esta semana.</h5>
+                    <h5 style="margin: 10px">Paciente ha avanzado en 2 tratamientos esta semana.</h5>
                     <br>
                 </div>
             </div>
@@ -221,10 +121,10 @@
     </div><!-- /.row -->
 </div><!-- /.container -->
 
-<!-- Denunciar a estudiante -->
+<!-- Denunciar a paciente -->
 <div class="modal fade" id="modal_denuncia" tabindex="-1" role="dialog" >
     <div class="modal-dialog">
-        <form id="form_denuncia_estudiante">
+        <form id="form_denuncia_paciente">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -272,7 +172,7 @@
     });
     
     // Muestra/oculta evaluar tratamiento
-    function denunciar_estudiante(){
+    function denunciar_paciente(){
         $("#modal_denuncia").modal("show");
     }
 
@@ -280,7 +180,7 @@
         window.location.href = '/profesor/profesor_chat/' + $(ths).data("idusuario");
     }
 
-    $("#form_denuncia_estudiante").on('submit',function(e){
+    $("#form_denuncia_paciente").on('submit',function(e){
         e.preventDefault();
         $.ajax({
             type: 'POST',
@@ -295,7 +195,7 @@
                     alert = confirm("Denuncia enviada correctamente. El administrador atenderá su denuncia.");
                     if(alert){
                         $("#modal_denuncia").modal("hide");
-                        window.location.href = '/profesor/perfil_estudiante/<%=data.idestudiante%>';
+                        window.location.href = '/profesor/perfil_paciente/<%=data.idpaciente%>';
                     }
                 } else{
                     alert("Error al ingresar la denuncia, intente nuevamente.");
@@ -310,3 +210,4 @@
 </script>
 
 <%- include ../layouts/footer.ejs %>
+

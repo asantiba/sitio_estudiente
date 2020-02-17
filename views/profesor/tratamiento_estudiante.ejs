@@ -29,7 +29,15 @@
                                     </tr>
                                     <tr>
                                         <td><h5 style="margin: 5px">Estudiante:</h5></td>
-                                        <td><h5 style="margin: 5px"><%=data.first_name%>.</h5></td>
+                                        <td>
+                                            <a style="margin: 5px" class="nav-link link" href="/profesor/perfil_estudiante/<%=data.idestudiante%>"><i style="" class="fa fa-user-circle"></i> <%=data.first_name%></a>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td><h5 style="margin: 5px">Paciente:</h5></td>
+                                        <td>
+                                            <a style="margin: 5px" class="nav-link link" href="/profesor/perfil_paciente/<%=data.idpaciente%>"><i style="" class="fa fa-user-circle"></i> <%=data.paciente%></a>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td><h5 style="margin: 5px">Estado:</h5></td>

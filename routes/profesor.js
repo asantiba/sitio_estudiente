@@ -26,7 +26,7 @@ router.get('/profesor_index/:periodo', function(req, res, next) {
         idprofesor = req.session.profesorData["idprofesor"].toString();
         periodo = req.params.periodo.toString();
         console.log(periodo);
-        Request.get("http://52.14.108.19:8000/get_asignaturas_dictadas/" + idprofesor + "/" + periodo, (error, response, body) => {
+        Request.get("http://18.223.149.128:8000/get_asignaturas_dictadas/" + idprofesor + "/" + periodo, (error, response, body) => {
             if(error) {
                 return console.log(error);
                 res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
@@ -59,7 +59,7 @@ router.post('/profesor_login_confirm', function(req, res, next) {
         try {
             Request.post({
                 "headers": { "content-type": "application/json" },
-                "url": "http://52.14.108.19:8000/login_prof/",
+                "url": "http://18.223.149.128:8000/login_prof/",
                 "body": JSON.stringify({
                     "email": input.email,
                     "password": input.password
@@ -104,7 +104,7 @@ router.post('/profesor_registrar_confirm', function(req, res, next) {
         try {
             Request.post({
                 "headers": { "content-type": "application/json" },
-                "url": "http://52.14.108.19:8000/crear_usr_prof/",
+                "url": "http://18.223.149.128:8000/crear_usr_prof/",
                 "body": JSON.stringify({
                     "first_name" : input.first_name,
                     "email": input.email,
@@ -131,7 +131,7 @@ router.get('/inscribir_asignatura/:periodo', function(req, res, next) {
         periodo = req.params.periodo.toString();
         idprofesor = req.session.profesorData["idprofesor"].toString();
         // Consulta a la api los estudiantes de esa asignatura en ese periodos
-        Request.get("http://52.14.108.19:8000/get_asignaturas/" + idprofesor + "/" + periodo, (error, response, body) => {
+        Request.get("http://18.223.149.128:8000/get_asignaturas/" + idprofesor + "/" + periodo, (error, response, body) => {
             if(error) {
                 return console.log(error);
                 res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
@@ -156,7 +156,7 @@ router.post('/inscribir_asignatura', function(req, res, next) {
         try {
             Request.post({
                 "headers": { "content-type": "application/json" },
-                "url": "http://52.14.108.19:8000/inscribir_asignatura/",
+                "url": "http://18.223.149.128:8000/inscribir_asignatura/",
                 "body": JSON.stringify({
                     "idprofesor": idprofesor,
                     "idasignatura": parseInt(input.idasignatura),
@@ -189,7 +189,7 @@ router.post('/desinscribir_asignatura', function(req, res, next) {
         try {
             Request.post({
                 "headers": { "content-type": "application/json" },
-                "url": "http://52.14.108.19:8000/desinscribir_asignatura/",
+                "url": "http://18.223.149.128:8000/desinscribir_asignatura/",
                 "body": JSON.stringify({
                     "idprofesor": idprofesor,
                     "idasignatura": parseInt(input.idasignatura),
@@ -218,7 +218,7 @@ router.get('/estudiantes_asignatura/:idasignatura_asignada', function(req, res, 
     if(req.session.profesorLogged != null && req.session.profesorLogged == true){
         idasignatura_asignada = req.params.idasignatura_asignada.toString();
         // Consulta a la api los estudiantes de esa asignatura en ese periodos
-        Request.get("http://52.14.108.19:8000/get_estudiantes_asignatura/" + idasignatura_asignada, (error, response, body) => {
+        Request.get("http://18.223.149.128:8000/get_estudiantes_asignatura/" + idasignatura_asignada, (error, response, body) => {
             if(error) {
                 return console.log(error);
                 res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
@@ -239,7 +239,7 @@ router.get('/tratamientos_estudiante/:idestudiante', function(req, res, next) {
     if(req.session.profesorLogged != null && req.session.profesorLogged == true){
         idestudiante = req.params.idestudiante.toString();
         // Consulta a la api los estudiantes de esa asignatura en ese periodos
-        Request.get("http://52.14.108.19:8000/get_tratamientos_estudiante/" + idestudiante, (error, response, body) => {
+        Request.get("http://18.223.149.128:8000/get_tratamientos_estudiante/" + idestudiante, (error, response, body) => {
             if(error) {
                 return console.log(error);
                 res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
@@ -260,7 +260,7 @@ router.get('/tratamiento_estudiante/:idasignatura_asignada', function(req, res, 
     if(req.session.profesorLogged != null && req.session.profesorLogged == true){
         idasignatura_asignada = req.params.idasignatura_asignada.toString();
         // Consulta a la api los estudiantes de esa asignatura en ese periodos
-        Request.get("http://52.14.108.19:8000/get_tratamiento_estudiante/" + idasignatura_asignada, (error, response, body) => {
+        Request.get("http://18.223.149.128:8000/get_tratamiento_estudiante/" + idasignatura_asignada, (error, response, body) => {
             if(error) {
                 return console.log(error);
                 res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
@@ -284,7 +284,7 @@ router.post('/evaluacion_tratamiento', function(req, res, next) {
         try {
             Request.post({
                 "headers": { "content-type": "application/json" },
-                "url": "http://52.14.108.19:8000/evaluacion_tratamiento/",
+                "url": "http://18.223.149.128:8000/evaluacion_tratamiento/",
                 "body": JSON.stringify({
                     "idtratamiento_asignado": parseInt(input.idtratamiento_asignado),
                     "votacion": parseInt(input.votacion),
@@ -299,7 +299,6 @@ router.post('/evaluacion_tratamiento', function(req, res, next) {
                 } else{
                     body = JSON.parse(body);
                     if(body["msj"] == "Tratamiento evaluado correctamente."){
-                        console.log("entra");
                         res.send({msj: "ok", idtratamiento_asignado:parseInt(input.idtratamiento_asignado) });
                     } else{
                         res.send({msj: "error"});
@@ -312,12 +311,12 @@ router.post('/evaluacion_tratamiento', function(req, res, next) {
     }
 });
 
-/* Entrega los estudiantes que hay en una asignatura */
+/* Entrega el perfil de estudiante */
 router.get('/perfil_estudiante/:idestudiante', function(req, res, next) {
     if(req.session.profesorLogged != null && req.session.profesorLogged == true){
         idestudiante = req.params.idestudiante.toString();
         // Consulta a la api los estudiantes de esa asignatura en ese periodos
-        Request.get("http://52.14.108.19:8000/get_estudiante/" + idestudiante, (error, response, body) => {
+        Request.get("http://18.223.149.128:8000/get_estudiante/" + idestudiante, (error, response, body) => {
             if(error) {
                 return console.log(error);
                 res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
@@ -330,6 +329,151 @@ router.get('/perfil_estudiante/:idestudiante', function(req, res, next) {
     } else {
         // Si no, lo redirige a una vista donde solo puede ver el recurso sin detalles
         res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+    }
+});
+
+/* Entrega el perfil de paciente */
+router.get('/perfil_paciente/:idpaciente', function(req, res, next) {
+    if(req.session.profesorLogged != null && req.session.profesorLogged == true){
+        idpaciente = req.params.idpaciente.toString();
+        // Consulta a la api los pacientes de esa asignatura en ese periodos
+        Request.get("http://18.223.149.128:8000/get_paciente/" + idpaciente, (error, response, body) => {
+            if(error) {
+                return console.log(error);
+                res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+            } else{
+                data = JSON.parse(body);
+                console.log(data);
+                res.render('profesor/perfil_paciente', { is_login: req.session.profesorLogged, data: data});
+            }
+        });
+    } else {
+        // Si no, lo redirige a una vista donde solo puede ver el recurso sin detalles
+        res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+    }
+});
+
+/* Entrega la vista de mensajes */
+router.get('/profesor_mensajes', function(req, res, next) {
+    if(req.session.profesorLogged != null && req.session.profesorLogged == true){
+        idusuario = req.session.profesorData["idusuario"].toString();
+        console.log(idusuario);
+        // Consulta a la api los pacientes de esa asignatura en ese periodos
+        Request.get("http://18.223.149.128:8000/get_conversaciones/" + idusuario, (error, response, body) => {
+            if(error) {
+                return console.log(error);
+                res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+            } else{
+                data = JSON.parse(body);
+                console.log(data);
+                res.render('profesor/profesor_mensajes', { is_login: req.session.profesorLogged, data: data});
+            }
+        });
+    } else {
+        // Si no, lo redirige a una vista donde solo puede ver el recurso sin detalles
+        res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+    }
+});
+
+/* Entrega la vista de chat con un usuario */
+router.get('/profesor_chat/:idusuario', function(req, res, next) {
+    if(req.session.profesorLogged != null && req.session.profesorLogged == true){
+        idusuario2 = req.params.idusuario.toString();
+        idusuario = req.session.profesorData["idusuario"].toString();
+        Request.get("http://18.223.149.128:8000/get_usuario/" + idusuario2, (error, response, body) => {
+            if(error) {
+                return console.log(error);
+                res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+            } else{
+                data = JSON.parse(body);
+                nombre_usuario = data["first_name"] + " " + data["last_name"];
+                // Consulta a la api los pacientes de esa asignatura en ese periodos
+                Request.get("http://18.223.149.128:8000/get_conversacion/" + idusuario + "/" + idusuario2, (error, response, body) => {
+                    if(error) {
+                        return console.log(error);
+                        res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+                    } else{
+                        data = JSON.parse(body);
+                        console.log(data);
+                        res.render('profesor/profesor_chat', { is_login: req.session.profesorLogged, data: data, 
+                            idusuario_prof: req.session.profesorData["idusuario"], idusuario: idusuario2, 
+                            nombre_usuario: nombre_usuario });
+                    }
+                });
+            }
+        });
+    } else {
+        // Si no, lo redirige a una vista donde solo puede ver el recurso sin detalles
+        res.render('profesor/profesor_login', { is_login: req.session.profesorLogged, data: false });
+    }
+});
+
+/* Ingresa un mensaje a otro usuario */
+router.post('/guardar_msj', function(req, res, next) {
+    if(req.session.profesorLogged == true){
+        var input = JSON.parse(JSON.stringify(req.body));
+        idusuario = parseInt(req.session.profesorData["idusuario"]);
+        // Se hace la consulta a la api de estudiente
+        try {
+            Request.post({
+                "headers": { "content-type": "application/json" },
+                "url": "http://18.223.149.128:8000/guardar_msj/",
+                "body": JSON.stringify({
+                    "id_receptor": parseInt(input.id_receptor),
+                    "id_emisor": parseInt(idusuario),
+                    "mensaje": input.mensaje
+                })
+            }, (error, response, body) => {
+                if(error) {
+                    return console.log(error);
+                } else{
+                    body = JSON.parse(body);
+                    if(body["idmensaje"]){
+                        console.log(body);
+                        res.send({msj: "ok" });
+                    } else{
+                        res.send({msj: "error"});
+                    }
+                }
+            });
+        } catch(error) {
+            console.error(error);
+        }
+    }
+});
+
+/* Ingresa una denuncia de profesor a un estudiante */
+router.post('/denunciar', function(req, res, next) {
+    if(req.session.profesorLogged == true){
+        var input = JSON.parse(JSON.stringify(req.body));
+        idusuario = req.session.profesorData["idusuario"].toString();
+        // Se hace la consulta a la api de estudiente
+        try {
+            Request.post({
+                "headers": { "content-type": "application/json" },
+                "url": "http://18.223.149.128:8000/post_denuncia/",
+                "body": JSON.stringify({
+                    "iddenunciador": idusuario,
+                    "idusuario": parseInt(input.idusuario),
+                    "denuncia": input.denuncia,
+                    "url": ""
+                })
+            }, (error, response, body) => {
+                if(error) {
+                    return console.log(error);
+                } else{
+                    body = JSON.parse(body);
+                    if(body["iddenuncia"]){
+                        console.log(body);
+                        res.send({msj: "ok"});
+                    } else{
+                        res.send({msj: "error"});
+                    }
+                }
+            });
+        } catch(error) {
+            console.error(error);
+        }
     }
 });
 
