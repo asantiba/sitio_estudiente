@@ -44,7 +44,7 @@
                 url: '/profesor/profesor_registrar_confirm',
                 success: function(data){
                     if(data.msj == "ok"){
-                        alert(data.msj)
+                        alert("Habilite su cuenta ingresando al link enviado a su correo.");
                         window.location.href = "/profesor/profesor_index";
                     } else if(data.msj == "deshabilitado"){
                         alert("Su cuenta se encuentra inhabilitada.");
