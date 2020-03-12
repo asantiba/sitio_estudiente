@@ -1,0 +1,49 @@
+<%- include ../layouts/profesor_header.ejs %>
+
+<div class="container blog-content" id="seccion1">
+
+    <div class="row">
+        <!-- Columna del medio -->
+        <div class="col-sm-12" id="central_col">
+            <div class="blog-main" id="asignaturas_dictadas">
+                <div class="sidebar-module">
+                    <div class="panel panel-default">
+                        <h4 style="font-weight: 600; padding: 10px; margin-left: 5px; margin-right: 5px; margin-bottom: 2px; text-align: center; padding-bottom: 5px; border-bottom: solid #289B89"> ¡Bienvenido a Estudiente!
+                        </h4><br>
+                        <div class="pull-right" style="width: 100px; margin-right: 5px">
+                            Su cuenta ha sido confirmada, para acceder a su cuenta presione Ingresar en la navegación de la página.
+                        </div>
+                        
+                </div><!-- /.blog-sidebar -->
+            </div>
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var largo = $(window).height();
+        $("#seccion1").css("min-height", largo-250)
+        $(".desinscribir_asignatura").on('click',function(e){
+        e.preventDefault();
+        var periodo = $("#form_periodo :selected").val();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({idasignatura: $(this).data("idasignatura"), periodo: periodo }),
+            contentType: 'application/json',
+            url: '/profesor/inscribir_asignatura',
+            success: function(data){
+                if(data.msj == "ok"){
+                    window.location.href = "/profesor/profesor_index/" + periodo;
+                } else{
+                    alert("Error al ingresar la calificación, intente nuevamente.");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+    });
+</script>
+
+<%- include ../layouts/footer.ejs %>

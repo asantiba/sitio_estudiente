@@ -46,7 +46,6 @@ router.get('/profesor_logout', function(req, res, next) {
     if(req.session.profesorLogged == true){
         req.session.profesorLogged = false;
         req.session.profesorData["logged"] = false;
-        
     }
     res.redirect('/');
 });
@@ -98,6 +97,45 @@ router.get('/profesor_registrar', function(req, res, next) {
 
 /* Renderiza verifica los datos */
 router.post('/profesor_registrar_confirm', function(req, res, next) {
+    if(req.session.profesorLogged == false){
+        var input = JSON.parse(JSON.stringify(req.body));
+        // Se hace la consulta a la api de estudiente
+        try {
+            Request.post({
+                "headers": { "content-type": "application/json" },
+                "url": "http://3.12.46.204:8000/crear_usr_prof/",
+                "body": JSON.stringify({
+                    "first_name" : input.first_name,
+                    "email": input.email,
+                    "password": input.password
+                })
+            }, (error, response, body) => {
+                if(error) {
+                    return console.dir(error);
+                } else{
+                    data = JSON.parse(JSON.stringify(body));
+                    console.log(data);
+                    res.send({msj: "ok", data: data});
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+});
+
+/* Envia a la vista de confirmacion de cuenta */
+router.get('/get_validar_prof/:link', function(req, res, next) {
+    link = req.params.link.toString();
+    console.log(link);
+    link = link.split('/link');
+    console.log(link);
+    // Si esta logeado va al mainframe con todas las funcionalidades
+    res.render('profesor/profesor_index', {link: link});
+});
+
+/* Renderiza verifica los datos */
+router.post('/confirmar_cuenta', function(req, res, next) {
     if(req.session.profesorLogged == false){
         var input = JSON.parse(JSON.stringify(req.body));
         // Se hace la consulta a la api de estudiente
