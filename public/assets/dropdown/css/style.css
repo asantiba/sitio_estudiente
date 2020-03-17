@@ -97,7 +97,7 @@
         padding: 0.667em 3.263em  0.667em 1.667em; }
   .nav-dropdown .link::after,
   .nav-dropdown .dropdown-item::after {
-    color: inherit; }
+    color: #025E7C; }
   .nav-dropdown .btn {
     font-size: 0.75rem;
     font-weight: 700;
@@ -196,7 +196,7 @@
     .nav-dropdown-sm .dropdown-item:focus,
     .nav-dropdown-sm .dropdown-item:hover {
       background: rgba(0, 0, 0, 0.2) !important;
-      color: #c0a375; }
+      color: #025E7C !important; }
   .nav-dropdown-sm .nav-btn {
     position: relative;
     padding: 1.5625rem 1.5625rem 0 1.5625rem; }

@@ -132,7 +132,7 @@ body {
   border-radius: 3px;
 }
 .bg-primary {
-  background-color: #3e7b8f !important;
+  background-color: #053A82 !important;
 }
 .bg-success {
   background-color: #f7ed4a !important;
@@ -1420,7 +1420,7 @@ body {
 .cid-rAyFsCEsM1 .navbar {
   background: #ffffff;
   transition: none;
-  min-height: 77px;
+  min-height: 90px;
   padding: .5rem 0;
 }
 .cid-rAyFsCEsM1 .navbar-dropdown.bg-color.transparent.opened {
@@ -1466,7 +1466,7 @@ body {
   margin-left: 5rem;
   padding: 0;
   transition: padding 15s;
-  min-height: 3.8rem;
+  min-height: 5rem;
   -webkit-align-items: center;
   align-items: center;
 }
@@ -1550,7 +1550,7 @@ body {
 }
 .cid-rAyFsCEsM1 .navbar.navbar-short {
   min-height: 60px;
-  transition: all .2s;
+  transition: all .8s;
 }
 .cid-rAyFsCEsM1 .navbar.navbar-short .navbar-toggler-right {
   top: 20px;

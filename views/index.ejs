@@ -8,14 +8,14 @@
 
         <div class="container">
             <div class="media-container-row">
-                <div class="media-content align-center">
+                <div class="media-content align-center" style="padding-right: 5%">
                     <div class="mbr-section-text mbr-white pb-3">
-                    	<h2 class="mbr-text mbr-fonts-style">Aplicación Móvil EsTuDiente</h2>
+                    	<h2 class="mbr-text mbr-fonts-style">Aplicación Móvil Estudiente</h2>
                         <h3 class="mbr-text mbr-fonts-style display-5">
                             Busca dar respuesta al problema de salud dental en Chile, presentando un catálogo de tratamientos dentales a bajo costo.
                         </h3>
                     </div>
-                    <div class="mbr-section-btn">
+                    <div class="mbr-section-btn" style="padding-top: 10%">
                         <a class="btn btn-md btn-white-outline" href="#seccion2">Nuestra Aplicación</a>
                         <a class="btn btn-md btn-white-outline" href="/nosotros">Nuestro Equipo</a>
                     </div>
@@ -34,9 +34,13 @@
         <div class="container">
             <div class="media-container-row">
                 <div class="media-content align-center">
-                    <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Bienvenido a EsTuDiente</h2>
+                    <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Bienvenido a Estudiente</h2>
                     <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
-                        Aplicación intuitiva que busca presentar un catálogo de tratamientos dentales a bajo costo, impartidos por estudiantes de odontología supervisados por doctores expertos, con la finalidad de ayudar tanto a pacientes como a estudiantes.</h3>
+                        Aplicación intuitiva que busca presentar un catálogo de tratamientos dentales a bajo costo, impartidos por estudiantes de odontología supervisados por doctores expertos, con la finalidad de ayudar tanto a pacientes como a estudiantes.</h3><br>
+                    <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
+                        En ella podrás ver la información de los tratamientos, solicitar el tratamiento que desees y gestionar tus propios tratamientos, además de calificar tu tratamiento una vez terminado. Tendrás la opción de contactar al estudiante vía chat, al cual podrás dar acceso a tu información personal cuando lo desees.</h3><br>
+                    <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
+                        Te mostramos el avance de tus tratamientos de manera interactiva con un modelo dental 3D, que puedes ver a continuación.</h3>
                 </div>
                 <div class="media-content align-center">
                     <img src="assets/images/inicio.png" style="width: 80%">
@@ -67,17 +71,10 @@
         <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(168, 168, 168);">
         </div>
         <div class="container">
-            <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Pronto estaremos contigo ...</h2>
-            <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">Recuerda seguirnos en redes sociales para más información</h3>
+            <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">¡ Información importante !</h2>
+            <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">Lamentamos anunciar que debido a la situación de emergencia por el virus COVID19, <br>se cancela el evento Feria de software, donde teniamos propuesto presentarles nuestra aplicación.</h3> 
         </div>
-        <div class="container countdown-cont align-center">
-            <div class="daysCountdown" title="Days"></div>
-            <div class="hoursCountdown" title="Hours"></div> 
-            <div class="minutesCountdown" title="Minutes"></div> 
-            <div class="secondsCountdown" title="Seconds"></div>
-            <div class="countdown pt-5 mt-2" data-due-date="2020/03/22">
-            </div>
-        </div>
+        <img src="/assets/images/feria.jpg" style="height: 400px; margin-left: 35%">
     </section>
 
     <script src="/assets/three/three.min.js"></script>
@@ -87,12 +84,12 @@
         var scene, camera, renderer;
         var scene = new THREE.Scene();
         scene.background = new THREE.Color(0xE6FFFA);
-        var camera = new THREE.PerspectiveCamera(100,window.innerWidth*0.8/window.innerHeight*0.9, 1,5000);
-        camera.position.z = 4;
+        var camera = new THREE.PerspectiveCamera(100,window.innerWidth*0.7/window.innerHeight*0.7, 1,5000);
+        camera.position.z = -6;
         
         scene.add( camera );
 
-        var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+        var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.1 );
         scene.add( ambientLight );
         var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
         camera.add( pointLight );
@@ -101,7 +98,7 @@
         var diente;
         var loader = new THREE.OBJLoader();
 
-        loader.load("assets/modelos/pre-Molar.obj", 
+        loader.load("assets/modelos/Molar.obj", 
         function(object){
             object.traverse( function ( child ) {
                 if ( child instanceof THREE.Mesh ) {
@@ -113,7 +110,7 @@
         });
 
         var renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth*0.3,window.innerHeight*0.5);
+        renderer.setSize(window.innerWidth*0.35,window.innerHeight*0.5);
         var padre = document.getElementById("Modelo3d");
         padre.appendChild(renderer.domElement);
         
