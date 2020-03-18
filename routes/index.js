@@ -3,7 +3,12 @@ var router = express.Router();
 
 /* GET index. */
 router.get('/', function(req, res, next) {
-	res.render('index', {});
+	if(req.session.new_user == null){
+		req.session.new_user == true;
+		res.render('index', {new_user: true});
+	} else{
+		res.render('index', {new_user: false});
+	}
 });
 
 /* GET quienes somos. */

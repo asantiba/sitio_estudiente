@@ -43,7 +43,7 @@
                         Te mostramos el avance de tus tratamientos de manera interactiva con un modelo dental 3D, que puedes ver a continuación.</h3>
                 </div>
                 <div class="media-content align-center">
-                    <img src="assets/images/inicio.png" style="width: 80%">
+                    <img src="assets/images/inicio.png" style="max-width: 70%; width: auto">
                 </div>
             </div>   
         </div>
@@ -61,21 +61,37 @@
                     <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
                         Podrás ver el estado de tus dientes a través de un modelo dental 3d
                         con el que puedes interactuar, generado a partir del avance de tus tratamientos.</h3>
+                    <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
+                        Visualizarás la información detallada realizada por tratamiento.</h3>
                 </div>
             </div>   
         </div>
     </section>
 
-    <section class="countdown1 cid-rAyHAp7M3z mbr-parallax-background" id="seccion4">
-
-        <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(168, 168, 168);">
+    <!-- Modal aviso -->
+    <div class="modal fade" id="modal_aviso" tabindex="-1" role="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content" style="max-height: 93%">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h5>¡ Información importante !</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <h5 class="mbr-section-subtitle" style="font-size: 12px !important">Lamentamos anunciar que debido a la situación de emergencia por el virus COVID19, se cancela el evento Feria de software, donde teniamos propuesto presentarles nuestra aplicación. El lanzamiento de nuestra aplicación será pospuesto hasta nuevo aviso, lamentamos los inconvenientes y esperamos comprendan que su salud está primero.</h5><br>
+                    </div>
+                    <img src="/assets/images/feria.jpg" style="height: 350px; padding-left: 18%">
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button" style="padding: 0">Cerrar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container">
-            <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">¡ Información importante !</h2>
-            <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">Lamentamos anunciar que debido a la situación de emergencia por el virus COVID19, <br>se cancela el evento Feria de software, donde teniamos propuesto presentarles nuestra aplicación.</h3> 
-        </div>
-        <img src="/assets/images/feria.jpg" style="height: 400px; margin-left: 35%">
-    </section>
+    </div>
 
     <script src="/assets/three/three.min.js"></script>
     <script src="/assets/three/OBJLoader.js"></script>
@@ -136,6 +152,10 @@
             $("#seccion1").css("min-height", $(window).height())
             $("#seccion2").css("min-height", $(window).height())
             $("#seccion3").css("min-height", $(window).height())
+            if("<%=new_user%>" == "false"){
+                $("#modal_aviso").modal("show");            
+                console.log("entra");
+            }
         });
     </script>
 <%- include layouts/footer.ejs %>
