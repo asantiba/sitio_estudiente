@@ -39,8 +39,8 @@
                         </div>
                     </div>
                     <div class="mbr-section-text mbr-white pb-1 col-sm-12">
-                        <br><br><br><br><br><br>
-                        <h1 class="mbr-section-title align-center mbr-fonts-style display-2">*correspondientes a estudios realizados por el MINSAL</h1>
+                        <h3 class="align-center mbr-fonts-style">Lo que se traduce en 350 días de espera en el sistema público.</h3>
+                        <h1 class="mbr-section-title align-center mbr-fonts-style display-2">Correspondientes a estudios proporcionados por el Ministerio de Salud.</h1>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
         var scene, camera, renderer;
         var scene = new THREE.Scene();
         scene.background = new THREE.Color(0xE6FFFA);
-        camera.position.z = -8;
+        camera.position.z = -4;
         
         scene.add( camera );
 
@@ -170,7 +170,7 @@
                     child.material = new THREE.MeshNormalMaterial();
                 }
             });
-            object.position.y = -1;
+            object.position.y = -0.75;
             scene.add(object);
         });
 

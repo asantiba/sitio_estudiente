@@ -1,0 +1,50 @@
+.btn_log_prof {
+    background-color: #026f93;
+    padding: 3px !important;
+    margin: 5px;
+    height: 35px;
+    width: 130px;
+    cursor: pointer;
+    border: 0px;
+    font-size: 15px;
+    color: white !important;
+    border-radius: 28px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #283966;
+}
+.btn_log_prof:hover {
+    background-color: #025d7c !important;
+}
+.btn_log_prof:active {
+    position:relative;
+    top:1px;
+}
+.btn_icon{
+    position: relative;
+    padding: 5px
+}
+.btn_text{
+    position: relative;
+    margin: 0;
+    padding: 0px;
+    display: inline;
+}
+.btn_nav{
+    color: white !important; 
+}
+.btn_nav:hover{
+    background-color: #025d7c !important;
+}
+.linea_seccion{
+    font-weight: 600; 
+    padding: 10px; 
+    margin-left: 5px; 
+    margin-right: 5px; 
+    margin-bottom: 2px; 
+    text-align: center; 
+    padding-bottom: 5px; 
+    border-bottom: solid #289B89
+}
+.btn{
+    padding: 2px !important;
+}

@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/style_estudiente.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 </head>
 
 <body style="max-width: 100%; min-width: 100%">
@@ -34,24 +34,21 @@
                 <span class="icon-bar"></span>
               </button>
               <a href="/">
-                    <img src="/assets/images/letras_logo.png" style="width: 140px; height: 6rem">
+                    <img src="/assets/images/letras_logo.png" style="width: 140px; height: 5rem">
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li><a class="btn_nav" href="/">Inicio</a></li>
+                <li><a class="btn_nav" href="/profesor">Asignaturas</a></li>
+                <li><a class="btn_nav" href="/profesor/profesor_mensajes">Chat</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <div class="navbar-buttons mbr-section-btn">
-                        <a class="btn btn-primary display-4 myButton" href="/profesor" style="margin: 0;">
-                            <span class="glyphicon glyphicon-user" style="position: absolute; left: 5px; margin: 12px"></span>
-                            <h5 style="margin-top: 5px; margin-left: 20px">Plataforma Profesor</h5>
-                        </a>
-                    </div>
+                    <a class="btn_log_prof" href="/profesor">
+                        <span class="glyphicon glyphicon-log-in btn_icon"></span>
+                        <h5 class="btn_text">Cerrar Sesión</h5>
+                    </a>
                 </li>
               </ul>
             </div>
@@ -59,27 +56,4 @@
         </nav>
     </section>
     <!-- END HEADER -->
-
-    <style>
-        .myButton {
-            background-color: #053A82 !important;
-            border-radius:28px;
-            border:0px solid #18ab29;
-            display:inline-block;
-            cursor:pointer;
-            color:#ffffff;
-            font-family:Arial;
-            font-size:17px;
-            padding:16px 31px;
-            text-decoration:none;
-            text-shadow:0px 1px 0px #2f6627;
-        }
-        .myButton:hover {
-            background-color:#5cbf2a;
-        }
-        .myButton:active {
-            position:relative;
-            top:1px;
-        }
-    </style>
 <!-- <body> cierra en footer -->
