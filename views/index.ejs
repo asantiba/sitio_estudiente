@@ -162,28 +162,24 @@
                     <img class="col-sm-6 align-center" src="/assets/images/feria.jpg" style="width: auto;">
                 </div>
             </div>   
-        </div>
     </section>
 
     <!-- Modal aviso -->
-    <div class="modal fade" id="modal_aviso" tabindex="-1" role="dialog" >
+    <div class="modal fade" id="modal_aviso" tabindex="-1" role="dialog" style="max-width: 100%; width: auto">
         <div class="modal-dialog">
-            <div class="modal-content" style="max-height: 93%">
+            <div class="modal-content" style="max-height: 93%; height: auto;">
                 <div class="modal-header">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h5>¡ Información importante !</h5>
+                    <h5>¡ Aviso importante !</h5>
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                        <h5 class="mbr-section-subtitle" style="font-size: 12px !important">Lamentamos anunciar que debido a la situación de emergencia por el virus COVID19, se cancela el evento Feria de software, donde teniamos propuesto presentarles nuestra aplicación. El lanzamiento de nuestra aplicación será pospuesto hasta nuevo aviso, lamentamos los inconvenientes y esperamos comprendan que su salud está primero.</h5><br>
+                        <h5 class="mbr-section-subtitle" style="font-size: 1.2vw !important">Lamentamos anunciar que debido a la situación de emergencia por el virus COVID19, se cancela el evento Feria de software, donde teniamos propuesto presentarles nuestra aplicación. El lanzamiento de nuestra aplicación será pospuesto hasta nuevo aviso, lamentamos los inconvenientes y esperamos comprendan que su salud está primero.</h5><br>
                     </div>
-                    <img src="/assets/images/feria.jpg" style="height: 350px; padding-left: 18%">
-                </div>
-                <div class="modal-footer">
-                    <div class="pull-right">
-                        <button class="btn btn-secondary" data-dismiss="modal" type="button" style="padding: 0">Cerrar</button>
+                    <div class="media-content align-center">
+                        <img src="/assets/images/feria.jpg" style="max-height: 280px; height: auto;border-radius: 5%">
                     </div>
                 </div>
             </div>
@@ -197,9 +193,7 @@
         var scene, camera, renderer;
         var scene = new THREE.Scene();
         scene.background = new THREE.Color(0xE6FFFA);
-        var camera = new THREE.PerspectiveCamera(100,window.innerWidth*0.7/window.innerHeight*0.7, 1,5000);
-        camera.position.z = -4;
-
+        camera.position.z = -8;
         
         scene.add( camera );
 
@@ -224,7 +218,7 @@
         });
 
         var renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth*0.35,window.innerHeight*0.5);
+        renderer.setSize(window.innerWidth*0.5,window.innerHeight*0.5);
         var padre = document.getElementById("Modelo3d");
         padre.appendChild(renderer.domElement);
         
@@ -250,9 +244,11 @@
             $("#seccion1").css("min-height", $(window).height())
             $("#seccion2").css("min-height", $(window).height())
             $("#seccion3").css("min-height", $(window).height())
-            if("<%=new_user%>" == "false"){
+            if("<%=new_user%>" == "true"){
                 $("#modal_aviso").modal("show");            
-                console.log("entra");
+                console.log("<%=new_user%>");
+            } else{
+                console.log("<%=new_user%>");
             }
         });
     </script>
