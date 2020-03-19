@@ -3,7 +3,7 @@
     padding: 3px !important;
     margin: 5px;
     height: 35px;
-    width: 130px;
+    width: 135px;
     cursor: pointer;
     border: 0px;
     font-size: 15px;
@@ -47,4 +47,22 @@
 }
 .btn{
     padding: 2px !important;
+}
+.card{
+    padding: 2px;
+    border-width: 2px;
+    border-color: gray;
+    border-collapse: "card"
+}
+.card:hover{
+    background-color: #A4E0F4;
+}
+a:link{
+    text-decoration:none !important;
+}
+.align-center{
+    text-align: center;
+}
+.text_white{
+    color: white;
 }
