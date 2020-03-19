@@ -1,0 +1,89 @@
+<%- include layouts/header.ejs %>
+
+    <section class="cid-rAyHAp7M3z" style="background-color: #A4E0F4" id="seccion1">
+        <div class="container" style="max-width: 100%; width: auto;">
+            <div class="row" style="margin-top: 5%">
+                <div class="align-center col-sm-5 col-sm-offset-1" style="margin-top: 7%">
+                    <h3>
+                        Con EsTuDiente podrás solicitar el tratamiento que buscas, elegir al estudiante lo imparte en la fecha que solicites, y obtendrás el progreso de las sesiones a través del detalle de los tratamientos y el modelo dental 3D.
+                    </h3><br>
+                    <a class="btn_app" href="#seccion2">Navega en la App</a>
+                </div>
+                <div class="align-center col-sm-6">
+                    <img src="assets/images/inicio_paciente.png" style="max-width: 70%; width: auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cid-rAyHAp7M3z" style="background-color: #A4E0F4" id="seccion2">
+        <div class="container" style="max-width: 100%; width: auto;">
+            <div class="row linea_seccion" style="background-color: #059ACC">
+                <div class="col-sm-12 align-center">
+                    <h2 class="text_white">Pasos dentro de la Aplicación</h2>
+                </div>
+                <div class="align-center col-sm-6">
+                    <img src="assets/images/buscar_tratamiento.png" style="max-width: 30%; width: auto">
+                    <img src="assets/images/tratamientos.png" style="max-width: 30%; width: auto">
+                </div>
+                <div class="col-sm-5" style="">
+                    <h4 class="text_white" style="margin-top: 15%">
+                        1) Busca el tratamiento que necesitas y compara los diferentes precios de diferentes universidades.
+                    </h4>
+                </div>
+            </div><br>
+            <div class="row linea_seccion" style="background-color: #059ACC">
+                <div class="col-sm-5 col-sm-offset-1" style="margin-top: 5%">
+                    <h4 class="text_white" style="">
+                        2) Selecciona la fecha y hora que tengas disponible y el estudiante que prefieras para realizar el tratamiento. Para solicitar el tratamiento debes otorgar acceso a tus datos al estudiante, este puede ser revocado cuando lo desees.
+                    </h4>
+                </div>
+                <div class="col-sm-6">
+                    <img src="assets/images/solicitarTratamiento.png" style="max-width: 30%; width: auto">
+                    <img src="assets/images/accesos.png" style="max-width: 30%; width: auto">
+                </div>
+            </div><br>
+
+            <div class="row linea_seccion" style="background-color: #059ACC">
+                <div class="col-sm-5 col-sm-offset-1">
+                    <img src="assets/images/chat.png" style="max-width: 40%; width: auto">
+                </div>
+                <div class="col-sm-5" style="margin-top: 5%">
+                    <h4 class="text_white">
+                        3) Comunícate mediante el chat de la aplicación con los estudiantes con los que te estás tratando en caso de cualquier duda.
+                    </h4>
+                </div>
+            </div><br>
+
+            <div class="row linea_seccion" style="background-color: #059ACC">
+                <div class="col-sm-5 col-sm-offset-1" style="margin-top: 5%">
+                    <h4 class="text_white" style="">
+                        4) Revisa todos los tratamientos que has adquirido y visualiza tu estado y progreso en tus tratamientos en el modelo dental 3D personalizado.
+                    </h4>
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <img src="assets/images/modelo_dental.png" style="max-width: 40%; width: auto">
+                    <img src="assets/images/diente.png" style="max-width: 40%; width: auto">
+                </div>
+            </div><br>   
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#seccion1").css("min-height", $(window).height())
+            $("#seccion2").css("min-height", $(window).height())
+            $("#seccion3").css("min-height", $(window).height())
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<%- include layouts/footer.ejs %>

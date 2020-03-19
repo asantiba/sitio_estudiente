@@ -16,6 +16,16 @@ router.get('/nosotros', function(req, res, next) {
 	res.render('nosotros', {});
 });
 
+/* GET app paciente. */
+router.get('/app_paciente', function(req, res, next) {
+	res.render('app_paciente', {});
+});
+
+/* GET app estudiante. */
+router.get('/app_estudiante', function(req, res, next) {
+	res.render('app_estudiante', {});
+});
+
 /* GET preguntas frecuentes. */
 router.get('/preguntas_frecuentes', function(req, res, next) {
 	res.render('preguntas_frecuentes', {});

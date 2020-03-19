@@ -19,6 +19,28 @@
     position:relative;
     top:1px;
 }
+.btn_app {
+    background-color: none;
+    border-radius:15px;
+    border: 2px solid white;
+    padding: 5px 20px !important;
+    margin: 5px;
+    height: 40px !important;
+    width: 150px !important;
+    cursor:pointer;
+    color: white;
+    font-size:15px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #e1e2ed;
+}
+.btn_app:hover {
+    background-color: white;
+    color: black;
+}
+.btn_app:active {
+    position:relative;
+    color: white !important;
+}
 .btn_icon{
     position: relative;
     padding: 5px
@@ -43,7 +65,10 @@
     margin-bottom: 2px; 
     text-align: center; 
     padding-bottom: 5px; 
-    border-bottom: solid #289B89
+    border-bottom: solid #053A82
+    -webkit-box-shadow: 21px 22px 31px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 21px 22px 31px -7px rgba(0,0,0,0.75);
+    box-shadow: 21px 22px 31px -7px rgba(0,0,0,0.75);
 }
 .btn{
     padding: 2px !important;
